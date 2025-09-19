@@ -75,7 +75,7 @@ export default function Home() {
 
       {/* Member circle buttons */}
       <div className="mb-6 flex flex-col items-center">
-        <label className="mb-2 font-medium text-center">members (none selected: all)</label>
+        <label className="mb-2 font-medium text-center">members (default any member if none selected)</label>
         <div className="flex gap-2 flex-wrap justify-center">
           {memberNumbers.map((num) => {
             const isSelected = selectedMembers.includes(num);

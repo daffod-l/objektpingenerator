@@ -133,7 +133,7 @@ export default function Home() {
       </div>
 
       {/* Placeholder for future board display */}
-      <div className="text-gray-500 italic">pins will appear here</div>
+      <div className="text-gray-500 italic">pins will appear here!</div>
     </div>
   );
 }

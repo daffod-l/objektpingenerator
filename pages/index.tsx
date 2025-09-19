@@ -11,14 +11,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+type StyleOption = "rainbow" | "gradient" | "single";
+
+interface StyleButton {
+  label: string;
+  value: StyleOption;
+}
+
 export default function Home() {
-  const [selectedStyle, setSelectedStyle] = useState<"rainbow" | "gradient" | "single">("rainbow");
+  const [selectedStyle, setSelectedStyle] = useState<StyleOption>("rainbow");
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [pinCount, setPinCount] = useState<string>("9");
   const [allowDuplicateMembers, setAllowDuplicateMembers] = useState<boolean>(true);
   const [allowDuplicateObjekts, setAllowDuplicateObjekts] = useState<boolean>(true);
 
-  const styleOptions = [
+  const styleOptions: StyleButton[] = [
     { label: "rainbow", value: "rainbow" },
     { label: "gradient", value: "gradient" },
     { label: "single colour", value: "single" },
@@ -27,11 +34,9 @@ export default function Home() {
   const memberNumbers = Array.from({ length: 24 }, (_, i) => i + 1); // S1-S24
 
   const toggleMember = (num: number) => {
-    if (selectedMembers.includes(num)) {
-      setSelectedMembers(selectedMembers.filter((n) => n !== num));
-    } else {
-      setSelectedMembers([...selectedMembers, num]);
-    }
+    setSelectedMembers((prev) =>
+      prev.includes(num) ? prev.filter((n) => n !== num) : [...prev, num]
+    );
   };
 
   return (
@@ -55,7 +60,7 @@ export default function Home() {
           return (
             <button
               key={option.value}
-              onClick={() => setSelectedStyle(option.value as any)}
+              onClick={() => setSelectedStyle(option.value)}
               className={`px-6 py-3 rounded-lg font-medium transition min-w-[120px] text-center ${
                 isSelected
                   ? "bg-black text-white border-2 border-black"
